@@ -5,6 +5,8 @@ import 'package:smart_quiz_app/models/game.dart';
 import 'package:smart_quiz_app/services/auth_services.dart';
 import 'package:smart_quiz_app/theme/theme.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:smart_quiz_app/views/games_screens/flappy_bird.dart';
+import 'package:smart_quiz_app/views/games_screens/snake_game.dart';
 import 'package:smart_quiz_app/views/games_screens/xo_game.dart';
 import 'package:smart_quiz_app/views/login_view.dart';
 import 'package:smart_quiz_app/views/user/category_view.dart';
@@ -388,14 +390,14 @@ class _HomeViewState extends State<HomeView> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Scaffold(),
+                builder: (context) => SnakeGame(),
               ),
             );
           } else if (index == 1) {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Scaffold(),
+                builder: (context) => FlappyBirdPage(),
               ),
             );
           } else {

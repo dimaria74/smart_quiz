@@ -18,7 +18,7 @@ class _TicTacToeGameState extends State<TicTacToeGame> {
   static const Color borderColor = Colors.orangeAccent;
 
   Timer? countdownTimer;
-  int remainingSeconds = 120;
+  int remainingSeconds = 30;
 
   @override
   void initState() {
