@@ -237,7 +237,7 @@ class _QuizResultViewState extends State<QuizResultView> {
                               ),
                               if (userRank != null)
                                 Text(
-                                  'You are ranked #$userRank',
+                                  'You are ranked $userRank',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,

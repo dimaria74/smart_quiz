@@ -52,7 +52,7 @@ class _QuizPlayViewState extends State<QuizPlayView>
                 _remainingMinutes--;
                 _remainingSeconds = 59;
               } else {
-                timer?.cancel();
+                timer.cancel();
                 _completeQuiz();
               }
             }
@@ -167,17 +167,10 @@ class _QuizPlayViewState extends State<QuizPlayView>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(
-                          Icons.close,
-                        ),
-                        color: AppTheme.txtPrimaryColor,
-                      ),
+                      Image.asset("assets/exit_button.png",
+                          height: 50, width: 50),
                       Text(
-                        "Speed Meets Smarts!",
+                        "Speed Meets Smarts",
                         style: TextStyle(color: Colors.white, fontSize: 80),
                       ),
                       Lottie.network('assets/json/thinging.json',

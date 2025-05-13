@@ -10,6 +10,7 @@ class UserHistoryView extends StatelessWidget {
     final user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
+      backgroundColor: Colors.amber,
       appBar: AppBar(
         title: Text(
           "Quiz History",
@@ -37,28 +38,54 @@ class UserHistoryView extends StatelessWidget {
 
                 return ListView.builder(
                   itemCount: history.length,
+                  padding: EdgeInsets.all(12),
                   itemBuilder: (context, index) {
                     final data = history[index];
-                    return ListTile(
-                      title: Text(
-                        data['quizTitle'] ?? 'Unknown Quiz',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    final timestamp = (data['timestamp'] as Timestamp).toDate();
+                    return Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                      subtitle: Text(
-                        'Score: ${data['score']} / ${data['total']}',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      trailing: Text(
-                        (data['timestamp'] as Timestamp).toDate().toString(),
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                      elevation: 4,
+                      margin: EdgeInsets.symmetric(vertical: 8),
+                      child: Padding(
+                        padding: EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              data['quizTitle'] ?? 'Unknown Quiz',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Icon(Icons.score, color: Colors.blueAccent),
+                                SizedBox(width: 8),
+                                Text(
+                                  'Score: ${data['score']} / ${data['total']}',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 8),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.access_time, color: Colors.grey),
+                                SizedBox(width: 8),
+                                Text(
+                                  '${timestamp.day}/${timestamp.month}/${timestamp.year} ${timestamp.hour}:${timestamp.minute.toString().padLeft(2, '0')}',
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.grey[600]),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     );
