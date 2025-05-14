@@ -64,7 +64,9 @@ class UserHistoryView extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Icon(Icons.score, color: Colors.blueAccent),
+                                Icon(Icons.score,
+                                    color: const Color.fromARGB(
+                                        255, 128, 161, 217)),
                                 SizedBox(width: 8),
                                 Text(
                                   'Score: ${data['score']} / ${data['total']}',

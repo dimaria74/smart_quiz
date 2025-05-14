@@ -75,7 +75,7 @@ class _SecondClassState extends State<SecondClass>
               Padding(
                 padding: EdgeInsets.only(top: 80),
                 child: Text(
-                  'Welcome to our Quiz app',
+                  'Welcome to growing minds edu game',
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w600,
@@ -107,7 +107,7 @@ class _SecondClassState extends State<SecondClass>
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Center(
-                  child: Image.asset("assets/fox.png"),
+                  child: Image.asset("assets/login1.png"),
                 ),
               ),
             ),

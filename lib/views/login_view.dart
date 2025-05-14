@@ -86,8 +86,8 @@ class _LoginViewState extends State<LoginView> {
                   borderRadius: BorderRadius.circular(22),
                   child: Image.asset(
                     "assets/login1.png",
-                    width: 465,
-                    height: 465,
+                    width: 430,
+                    height: 430,
                   ),
                 )), // Display login screen image
                 const SizedBox(height: 20),

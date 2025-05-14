@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_quiz_app/models/category.dart';
+import 'package:smart_quiz_app/models/course_model.dart';
 import 'package:smart_quiz_app/models/game.dart';
 import 'package:smart_quiz_app/services/auth_services.dart';
 import 'package:smart_quiz_app/theme/theme.dart';
@@ -10,6 +11,7 @@ import 'package:smart_quiz_app/views/games_screens/snake_game.dart';
 import 'package:smart_quiz_app/views/games_screens/xo_game.dart';
 import 'package:smart_quiz_app/views/login_view.dart';
 import 'package:smart_quiz_app/views/user/category_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final AuthService _authService = AuthService();
 
@@ -34,8 +36,23 @@ class _HomeViewState extends State<HomeView> {
     GameModel("Xo Game", "Take turns placing X or O to get three in a row!",
         "assets/games/xo game.png"),
   ];
+  final List<CourseModel> _courses = [
+    CourseModel("Math", "Improve your math skills", "assets/math.png"),
+    CourseModel("Science", "Improve your science skills", "assets/science.png"),
+    CourseModel("English", "Improve your math skills", "assets/english.png"),
+    CourseModel("ICT", "Improve your math skills", "assets/ict.png"),
+  ];
   List<String> _categoryFilters = ['All'];
   String _selectedFilter = 'All';
+  final Uri _englishCourse = Uri.parse(
+      'https://www.udemy.com/course/english-for-kids-e/?couponCode=CP130525');
+  final Uri _mathCourse = Uri.parse(
+      'https://www.udemy.com/course/pinkpencilmath_fundamentals_101/?couponCode=CP130525');
+  final Uri _scienseCourse = Uri.parse(
+      'https://www.udemy.com/course/the-magic-in-science/?couponCode=CP130525');
+  final Uri _icTCourse = Uri.parse(
+      'https://www.udemy.com/course/robotics-programming-stem-course-for-kids/?couponCode=CP130525');
+
   @override
   void initState() {
     _fetchCategories();
@@ -260,6 +277,26 @@ class _HomeViewState extends State<HomeView> {
                                 _buildGameCard(_games[index], index),
                           ),
                         ),
+                        Text(
+                          "Courses Section",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          height: 500.0,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: _courses.length,
+                            itemBuilder: (context, index) =>
+                                _buildCourseCard(_courses[index], index),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -459,5 +496,82 @@ class _HomeViewState extends State<HomeView> {
         )
         .slideY(begin: 0.5, end: 0, duration: Duration(milliseconds: 300))
         .fadeIn();
+  }
+
+  Widget _buildCourseCard(CourseModel category, int index) {
+    return Card(
+      color: Colors.orange,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: () {
+          if (index == 0) {
+            _launchUrl(_mathCourse);
+          } else if (index == 1) {
+            _launchUrl(_scienseCourse);
+          } else if (index == 2) {
+            _launchUrl(_englishCourse);
+          } else if (index == 3) {
+            _launchUrl(_icTCourse);
+          }
+        },
+        child: Container(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: AppTheme.primaryColor.withAlpha(45),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Image.network(
+                  category.image,
+                  height: 300,
+                  width: 300,
+                ),
+              ),
+              SizedBox(height: 16),
+              Text(
+                category.name,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(
+                category.description,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+                textAlign: TextAlign.center,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        ),
+      ),
+    )
+        .animate(
+          delay: Duration(
+            microseconds: 100 * index,
+          ),
+        )
+        .slideY(begin: 0.5, end: 0, duration: Duration(milliseconds: 300))
+        .fadeIn();
+  }
+
+  Future<void> _launchUrl(Uri uri) async {
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $uri');
+    }
   }
 }
