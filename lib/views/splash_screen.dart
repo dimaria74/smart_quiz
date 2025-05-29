@@ -21,7 +21,7 @@ class _SecondClassState extends State<SecondClass>
 
     scaleController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 600),
+      duration: Duration(milliseconds: 600), // 600
     )..addStatusListener(
         (status) {
           if (status == AnimationStatus.completed) {
@@ -66,7 +66,7 @@ class _SecondClassState extends State<SecondClass>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber,
+      backgroundColor: Colors.orange,
       body: Stack(
         children: [
           Row(
@@ -86,30 +86,10 @@ class _SecondClassState extends State<SecondClass>
             ],
           ),
           Center(
-            child: AnimatedOpacity(
-              curve: Curves.fastLinearToSlowEaseIn,
-              duration: Duration(seconds: 6),
-              opacity: _opacity,
-              child: AnimatedContainer(
-                curve: Curves.fastLinearToSlowEaseIn,
-                duration: Duration(seconds: 2),
-                height: _value ? 50 : 200,
-                width: _value ? 50 : 200,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.amber,
-                      blurRadius: 100,
-                      spreadRadius: 10,
-                    ),
-                  ],
-                  color: Colors.amber,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Center(
-                  child: Image.asset("assets/login1.png"),
-                ),
-              ),
+            child: Image.asset(
+              "assets/splash_logo.png",
+              height: 400,
+              width: 400,
             ),
           ),
         ],

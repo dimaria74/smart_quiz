@@ -1,4 +1,5 @@
 // This screen handles user login with email and password
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_quiz_app/services/auth_services.dart';
 import 'package:smart_quiz_app/views/admin/admin_home_view.dart';
@@ -52,6 +53,8 @@ class _LoginViewState extends State<LoginView> {
           builder: (_) => const HomeView(),
         ),
       );
+      // AudioPlayer audio = AudioPlayer();
+      // audio.play(AssetSource('kids-happy-music.mp3'));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('Login Failed: $result'), // Show error message

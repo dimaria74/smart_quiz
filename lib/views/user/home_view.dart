@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_quiz_app/models/category.dart';
@@ -53,10 +54,28 @@ class _HomeViewState extends State<HomeView> {
   final Uri _icTCourse = Uri.parse(
       'https://www.udemy.com/course/robotics-programming-stem-course-for-kids/?couponCode=CP130525');
 
+  AudioPlayer audio = AudioPlayer();
+
   @override
   void initState() {
     _fetchCategories();
     super.initState();
+    audio.play(AssetSource('kids-happy-music.mp3'));
+  }
+
+  PlayerState? _playerState;
+
+  bool togel = true;
+  Future<void> _pause() async {
+    await audio.pause();
+    togel = false;
+    setState(() => _playerState = PlayerState.paused);
+  }
+
+  Future<void> _play() async {
+    await audio.resume();
+    togel = true;
+    setState(() => _playerState = PlayerState.playing);
   }
 
   Future<void> _fetchCategories() async {
@@ -192,6 +211,14 @@ class _HomeViewState extends State<HomeView> {
               ),
               collapseMode: CollapseMode.pin,
             ),
+            actions: [
+              IconButton(
+                onPressed: () => togel ? _pause() : _play(),
+                icon: Icon(
+                  togel ? Icons.volume_off : Icons.volume_up,
+                ),
+              ),
+            ],
           ),
           SliverToBoxAdapter(
             child: Container(

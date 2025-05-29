@@ -167,8 +167,11 @@ class _QuizPlayViewState extends State<QuizPlayView>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Image.asset("assets/exit_button.png",
-                          height: 50, width: 50),
+                      InkWell(
+                        onTap: () => Navigator.of(context).pop(),
+                        child: Image.asset("assets/exit_button.png",
+                            height: 50, width: 50),
+                      ),
                       Text(
                         "Speed Meets Smarts",
                         style: TextStyle(color: Colors.white, fontSize: 80),

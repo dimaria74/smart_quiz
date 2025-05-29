@@ -191,10 +191,8 @@ class _CategoryViewState extends State<CategoryView> {
               ),
             ),
           );
-          //  final result = await audioPlay.er.play(kUrl);
-          // if (result == 1) setState(() => playerState = PlayerState.playing);
-          AudioPlayer audio = AudioPlayer();
-          audio.play(AssetSource('sound.wav'));
+          // AudioPlayer audio = AudioPlayer();
+          // audio.play(AssetSource('kids-happy-music.mp3'));
         },
         child: Padding(
           padding: const EdgeInsets.all(16),
